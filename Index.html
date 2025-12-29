@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Captain Tsubasa 5vs5</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icons/icon-192.png">
+    <style>
+        /* Estilos críticos inline para mejor rendimiento */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: #0c2461;
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            touch-action: none;
+        }
+        .screen { 
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: none;
+        }
+        .screen.active { display: block; }
+    </style>
+</head>
+<body>
+    <!-- Pantallas del Juego -->
+    <div id="splash" class="screen active">
+        <div class="splash-content">
+            <div class="logo">⚽</div>
+            <h1>CAPTAIN TSUBASA</h1>
+            <h2>5 vs 5</h2>
+            <div class="loading">Cargando...</div>
+        </div>
+    </div>
+
+    <div id="menu" class="screen">
+        <div class="menu-header">
+            <h1>CAPTAIN TSUBASA</h1>
+            <p>Selecciona tu equipo</p>
+        </div>
+        
+        <div class="team-select">
+            <div class="team-card" data-team="nankatsu">
+                <div class="team-color nankatsu"></div>
+                <div class="team-name">NANKATSU SC</div>
+                <div class="players">
+                    <div>• Tsubasa Ozora (10)</div>
+                    <div>• Genzo Wakabayashi (1)</div>
+                    <div>• Kojiro Hyuga (9)</div>
+                </div>
+            </div>
+            
+            <div class="team-card" data-team="toho">
+                <div class="team-color toho"></div>
+                <div class="team-name">TOHO ACADEMY</div>
+                <div class="players">
+                    <div>• Jun Misugi (6)</div>
+                    <div>• Ken Wakashimazu (1)</div>
+                    <div>• Shingo Takasugi (5)</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="menu-buttons">
+            <button id="start-game" class="btn-primary">INICIAR PARTIDO</button>
+            <button id="how-to-play" class="btn-secondary">CÓMO JUGAR</button>
+        </div>
+    </div>
+
+    <div id="game" class="screen">
+        <canvas id="game-canvas"></canvas>
+        
+        <!-- UI del Juego -->
+        <div class="game-ui">
+            <div class="scoreboard">
+                <div class="score left">
+                    <div class="team">NANKATSU</div>
+                    <div id="score-nankatsu" class="points">0</div>
+                </div>
+                <div class="time" id="game-time">00:00</div>
+                <div class="score right">
+                    <div class="team">TOHO</div>
+                    <div id="score-toho" class="points">0</div>
+                </div>
+            </div>
+            
+            <div class="player-info">
+                <div id="current-player">Tsubasa</div>
+                <div class="stats">
+                    <div class="stat">
+                        <span>ST:</span>
+                        <div class="bar stamina"><div class="fill" id="stamina-bar"></div></div>
+                    </div>
+                    <div class="stat">
+                        <span>SP:</span>
+                        <div class="bar special"><div class="fill" id="special-bar"></div></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Controles Touch -->
+            <div class="touch-controls">
+                <div class="joystick-area" id="move-joystick">
+                    <div class="joystick"></div>
+                </div>
+                <div class="action-buttons">
+                    <button class="action shoot">SHOOT</button>
+                    <button class="action pass">PASS</button>
+                    <button class="action special">SPECIAL</button>
+                </div>
+            </div>
+            
+            <button id="pause-btn" class="pause-btn">⏸️</button>
+        </div>
+    </div>
+
+    <div id="pause" class="screen">
+        <div class="modal">
+            <h2>PAUSA</h2>
+            <button id="resume" class="btn-primary">CONTINUAR</button>
+            <button id="restart" class="btn-secondary">REINICIAR</button>
+            <button id="quit" class="btn-tertiary">SALIR</button>
+        </div>
+    </div>
+
+    <div id="help" class="screen">
+        <div class="modal">
+            <h2>CÓMO JUGAR</h2>
+            <div class="help-content">
+                <p><strong>Joystick Izquierdo:</strong> Mover jugador</p>
+                <p><strong>SHOOT:</strong> Disparar al arco</p>
+                <p><strong>PASS:</strong> Pasar balón</p>
+                <p><strong>SPECIAL:</strong> Tiro especial (cuando la barra esté llena)</p>
+                <p>¡Anota más goles que el oponente!</p>
+            </div>
+            <button id="close-help" class="btn-primary">ENTENDIDO</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+    <script src="controls.js"></script>
+    <script src="app.js"></script>
+</body>
+  </html>￼Enter
